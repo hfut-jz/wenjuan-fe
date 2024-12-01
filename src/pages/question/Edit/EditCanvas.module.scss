@@ -1,0 +1,24 @@
+.canvasWrapper{
+  min-height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+}
+.componentWrapper{
+  margin: 12px;
+  border: 1px solid #fff;
+  padding:12px;
+  border-radius: 3px;
+  &:hover{
+    border-color: #d9d9d9;
+  }
+}
+.selected{
+  border-color:#1890ff !important;
+}
+.locked{
+  opacity: .5;
+  cursor: not-allowed;
+}
+.component {
+  pointer-events: none//禁止事件使得组件不让被点击到
+}
