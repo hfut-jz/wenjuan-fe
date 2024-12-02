@@ -1,7 +1,9 @@
+//组件内容
 export type OptionType={
     value:string
     text:string
 }
+//组件属性
 export type QuestionRadioPropsType={
     title?:string
     isVertical?:boolean
@@ -12,6 +14,11 @@ export type QuestionRadioPropsType={
     onChange?: (newProps: QuestionRadioPropsType) => void
     disabled?:boolean
 }
+//组件统计
+export type QuestionRadioStatPropsType={
+    stat: Array<{ name: string; count: number }>
+}
+
 export const QuestionRadioDefaultProps:QuestionRadioPropsType={
     title:'单选标题',
     isVertical:false,
@@ -22,3 +29,4 @@ export const QuestionRadioDefaultProps:QuestionRadioPropsType={
     ],
     value:''
 }
+//统计组件的数据类型

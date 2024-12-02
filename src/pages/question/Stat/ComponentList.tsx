@@ -1,14 +1,18 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 import useGetComponentsInfo from "../../../hooks/useGetComponentsInfo";
-import { useDispatch } from "react-redux";
-import { changeSelectedId } from "../../../store/componentsReducer";
+
 import { getComponentConfByType } from "../../../components/QuestionComponents";
 import styles from "./ComponentList.module.scss";
 
-const LeftPanel: FC = () => {
+type PropsType = {
+    selectedComponentId: string;
+    setSelectedComponentId: (id: string) => void;
+    setSelectedComponentType: (type: string) => void;
+};
+const LeftPanel: FC<PropsType> = (props) => {
+    const {setSelectedComponentId,selectedComponentId,setSelectedComponentType}=props
     const { componentList = [], selectedId } = useGetComponentsInfo();
-    const dispatch = useDispatch();
 
     // 渲染每个组件
     function genComponent(c: any) {
@@ -24,14 +28,17 @@ const LeftPanel: FC = () => {
 
         // 选中样式
         const wrapperClassName = classNames(styles.componentWrapper, {
-            [styles.selected]: fe_id === selectedId,
+            [styles.selected]: fe_id === selectedComponentId,
         });
 
         return (
             <div
                 key={fe_id}
                 className={wrapperClassName}
-                onClick={() => dispatch(changeSelectedId(fe_id))}
+                onClick={() => {
+                    setSelectedComponentId(fe_id)
+                    setSelectedComponentType(type)
+                }}
             >
                 <div className={styles.component}>
                     <Component {...props} />

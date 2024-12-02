@@ -1,4 +1,4 @@
-import React,{FC} from 'react'
+import React, {FC, useState} from 'react'
 import useGetPageInfo from "../../../hooks/useGetPageInfo";
 import {useTitle} from "ahooks";
 import useLoadQuestionListData from "../../../hooks/useLoadQuestionListData";
@@ -8,12 +8,16 @@ import {useNavigate} from "react-router-dom";
 import styles from './index.module.scss'
 import StatHeader from "./StatHeader";
 import ComponentList from "./ComponentList";
+import PageList from "./PageList";
+import ChartStat from "./ChartStat";
 const Stat:FC=()=>{
     const nav=useNavigate()
     const {title,isPublish}=useGetPageInfo()
     //从服务端加载数据,直接使用钩子函数useLoadQuestionData
     const {loading}=useLoadQuestionListData()
 
+    const [selectedComponentId, setSelectedComponentId] = useState('')
+    const [selectedComponentType, setSelectedComponentType] = useState('')
     useTitle(`问卷统计-${title}`)
     if(loading)return (
         <div style={{textAlign:"center",marginTop:"60px"}}>
@@ -35,9 +39,13 @@ const Stat:FC=()=>{
             <StatHeader></StatHeader>
             <div className={styles['containerWrapper']}>
                 <div className={styles.content}>
-                    <div className={styles.left}><ComponentList></ComponentList></div>
-                    <div className={styles.main}>中间</div>
-                    <div className={styles.right}>右边</div>
+                    <div className={styles.left}><ComponentList selectedComponentId={selectedComponentId}
+                                                                setSelectedComponentId={setSelectedComponentId}
+                                                                setSelectedComponentType={setSelectedComponentType}></ComponentList></div>
+                    <div className={styles.main}><PageList selectedComponentId={selectedComponentId}
+                                                           setSelectedComponentId={setSelectedComponentId}
+                                                           setSelectedComponentType={setSelectedComponentType}></PageList></div>
+                    <div className={styles.right}><ChartStat selectedComponentId={selectedComponentId} selectedComponentType={selectedComponentType}/></div>
                 </div>
             </div>
         </div>

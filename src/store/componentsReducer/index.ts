@@ -5,6 +5,7 @@ import {getNextSelectedId, insertNewComponent} from "./utils";
 import cloneDeep from 'lodash.clonedeep'
 import {arrayMove} from "@dnd-kit/sortable";
 
+
 //两种状态，一个存储的是组件本身的信息，一个存储的是组件在store中的信息
 export type ComponentInfoType = {
     fe_id: string
